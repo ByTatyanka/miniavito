@@ -9,9 +9,24 @@ export default class AllAds extends Component {
 
         this.state = {
             ad: [],
-            err: false
+            err: false,
+            favorit: []
         };
 
+    }
+
+    setFavorit = (id) => {
+
+        const {favorit} = this.state
+        if (favorit.includes(id)){
+
+            favorit.splice(favorit.indexOf(id), 1);
+            this.setState({favorit});
+            return
+        }
+
+        this.setState({favorit: [...favorit, ...id]});
+        return
     }
 
     componentDidMount() {
@@ -27,7 +42,7 @@ export default class AllAds extends Component {
     };
 
     render() {
-        console.log(this.props)
+        console.log(this.state)
         if (!this.state.ad.length) {
             return null;
         }
@@ -57,8 +72,10 @@ export default class AllAds extends Component {
             }
         })
 
+
+
         const ads = filterProductByPrice.map((item, index) => {
-            return <Ad key={item.id} {...item}/>
+            return <Ad key={item.id} {...item} setFavorit={this.setFavorit}/>
 
         });
 

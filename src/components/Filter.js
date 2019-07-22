@@ -8,7 +8,7 @@ export default class Filter extends Component {
         this.state ={
             selectValue: null,
             forPrice: 0,
-            toPrice: 0
+            toPrice: 0,
         }
     }
 

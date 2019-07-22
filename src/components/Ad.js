@@ -15,10 +15,10 @@ export default class Ad extends Component {
                         <p>{body_type}</p>
                         <p>{category}</p>
                         <p>{gearbox}</p>
-                        <p>{pictures}</p>
+                        <p>{/*pictures */}</p>
                         <p>{year}</p>
                     </Card.Text>
-                    <Button variant="primary">Go somewhere</Button>
+                    <Button variant="primary" onClick={()=>{this.props.setFavorit(id)}}>В избранное</Button>
                 </Card.Body>
             </Card>
 

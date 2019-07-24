@@ -10,22 +10,22 @@ export default class AllAds extends Component {
         this.state = {
             ad: [],
             err: false,
-            favorit: []
+            favourit: []
         };
 
     }
 
-    setFavorit = (id) => {
+    setFavourit = (id) => {
 
-        const {favorit} = this.state
-        if (favorit.includes(id)){
+        const {favourit} = this.state
+        if (favourit.includes(id)){
 
-            favorit.splice(favorit.indexOf(id), 1);
-            this.setState({favorit});
+            favourit.splice(favourit.indexOf(id), 1);
+            this.setState({favourit});
             return
         }
 
-        this.setState({favorit: [...favorit, ...id]});
+        this.setState({favourit: [...favourit, ...id]});
         return
     }
 
@@ -47,9 +47,18 @@ export default class AllAds extends Component {
             return null;
         }
 
-        const {selectValue, forPrice, toPrice} = this.props
+        const {selectValue, forPrice, toPrice, checFavourit} = this.props
 
-        const filterProductByCat = this.state.ad.filter((item) => {
+        let filterChecFavourit
+        if(checFavourit){
+            filterChecFavourit = this.state.ad.filter((item) => {
+                return this.state.favourit.includes(item.id);
+            })
+        } else {
+            filterChecFavourit = this.state.ad
+        }
+
+        const filterProductByCat = filterChecFavourit.filter((item) => {
             if (!selectValue) {
                 return true
             }
@@ -75,7 +84,7 @@ export default class AllAds extends Component {
 
 
         const ads = filterProductByPrice.map((item, index) => {
-            return <Ad key={item.id} {...item} setFavorit={this.setFavorit}/>
+            return <Ad key={item.id} {...item} setFavourit={this.setFavourit}/>
 
         });
 
